@@ -1,9 +1,12 @@
-import {FaTimes} from 'react-icons/fa'
+import {FaTimes, FaEdit} from 'react-icons/fa'
 import React from 'react'
 import Card from './shared/Card'
 import PropTypes from 'prop-types'
-function FeedbackItem({item, deleteHandler}) {
+import { useContext } from 'react'
+import FeedbackContext from '../context/FeedbackContext'
 
+function FeedbackItem({item}) {
+const {deleteFeedback, editFeedback} = useContext(FeedbackContext)
     // const clickHandler = () => {
     //     setRating((prev) => {
     //         return prev + 1
@@ -17,8 +20,11 @@ function FeedbackItem({item, deleteHandler}) {
     return (
         <Card>
             <div className="num-display">{item.rating}</div>
-            <button onClick = {() => deleteHandler(item.id)} className="close">
+            <button onClick = {() => deleteFeedback(item.id)} className="close">
                 <FaTimes color="purple"/>
+            </button>
+            <button onClick={() => editFeedback(item)} className="edit">
+                <FaEdit color="purple" />
             </button>
             <div className="text-display">{item.text}</div>
             {/* <button onClick={clickHandler}>Click</button> */}
