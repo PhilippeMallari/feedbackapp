@@ -11,10 +11,14 @@ import FeedbackContext from '../context/FeedbackContext';
         const [btnDisabled, setBtnDisabled] = useState(true)
         const [message, setMessage] = useState('')
 
-        const {addFeedback, feedbackEdit} = useContext(FeedbackContext)
+        const {addFeedback, feedbackEdit, updateFeedback} = useContext(FeedbackContext)
 
         useEffect(() => {
-            console.log('Hello')
+            if (feedbackEdit.edit === true) {
+                setBtnDisabled(false)
+                setText(feedbackEdit.item.text)
+                setRating(feedbackEdit.item.rating)
+            }
         }, [feedbackEdit])
 
         const handleTextChange = (e) => {
@@ -38,7 +42,12 @@ import FeedbackContext from '../context/FeedbackContext';
                     text,
                     rating
                 }
-                addFeedback(newFeedback)
+
+                if(feedbackEdit.edit === true) {
+                    updateFeedback(feedbackEdit.item.id, newFeedback)
+                } else {
+                    addFeedback(newFeedback)
+                } 
                 setText('')
             }
         }
