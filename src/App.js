@@ -28,21 +28,26 @@ function App() {
     // </div>))
 
     // if (loading) return <h1>Loading...</h1>
-
-
-
-
     return (
         <FeedbackProvider>
             <Router>
                 <Header />
-                <div className="container">
-                    <Route exact path='/'>
-                        <FeedbackForm />
-                        <FeedbackStats />
-                        <FeedbackList />
-                    </Route>
-                    <Route path='/about' component={AboutPage} />
+                <div className='container'>
+                    <Routes>
+                        <Route
+                            path='/'
+                            element={
+                                <>
+                                    <FeedbackForm />
+                                    <FeedbackStats />
+                                    <FeedbackList />
+                                </>
+                            }
+                        ></Route>
+
+                        <Route path='/about' element={<AboutPage />} />
+                    </Routes>
+
                     <AboutIconLink />
                 </div>
             </Router>
